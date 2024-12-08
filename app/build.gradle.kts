@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.russianrailways20"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.russianrailways20"
@@ -64,4 +64,12 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0")
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.0")
 
+    implementation ("androidx.compose.ui:ui:1.4.0") // или последняя версия Compose
+    implementation ("androidx.compose.material:material:1.4.0") // для Material UI
+    implementation ("androidx.compose.ui:ui-tooling-preview:1.4.0") // для превью в Compose
+
+    // Для ViewModel и Compose интеграции
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0")
+    implementation ("androidx.compose.runtime:runtime-livedata:1.4.0")
+    implementation("androidx.compose.material:material-icons-extended:1.7.5")
 }
