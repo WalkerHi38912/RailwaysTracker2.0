@@ -7,4 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="BackGroundColor">#facdcd</color>
+    <color name="FirstGradient">#898289</color>
+    <color name="SecondGradient">#646262</color>
+    <color name="ThirdGradient">#525058</color>
 </resources>
