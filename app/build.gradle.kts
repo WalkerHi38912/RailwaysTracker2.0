@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.russianrailways20"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -75,4 +75,12 @@ dependencies {
 
     //Navigation
     implementation ("androidx.navigation:navigation-compose:2.7.1")
+
+    //Material3 Core
+    implementation ("com.maxkeppeler.sheets-compose-dialogs:core:1.0.2")
+
+    //Material3 - Calendar
+    implementation ("com.maxkeppeler.sheets-compose-dialogs:calendar:1.0.2")
+
+
 }
