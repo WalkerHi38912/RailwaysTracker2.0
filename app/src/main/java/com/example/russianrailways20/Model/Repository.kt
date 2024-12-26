@@ -1,17 +1,20 @@
 package com.example.russianrailways20.Model
 
+import androidx.lifecycle.LiveData
+import com.example.russianrailways20.Model.DB.DAO
+import com.example.russianrailways20.Model.DB.PrevTripsEntity
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class Repository (private val TrainApi: TrainApiInterface, private val StationApi: StationApiInterface){
+class Repository (private val TrainApi: TrainApiInterface, private val StationApi: StationApiInterface, private val Dao: DAO){
+
+    // Работа с API
     private val _trainData = MutableStateFlow<TrainResponse?>(null)
     val trainData: StateFlow<TrainResponse?> = _trainData
 
     private val _stationsData = MutableStateFlow<StationResponse?>(null)
     val stationsData: StateFlow<StationResponse?> = _stationsData
-
-    private val _dataLoaded = MutableStateFlow(false)
-    val dataLoaded: StateFlow<Boolean> = _dataLoaded
 
     suspend fun getTrainSchedule(from: String, to: String, date: String) {
         try {
@@ -26,9 +29,33 @@ class Repository (private val TrainApi: TrainApiInterface, private val StationAp
         try {
             val response = StationApi.getStationsList()
             _stationsData.value = response
-            _dataLoaded.value = true  // Устанавливаем флаг, что данные получены
         } catch (e: Exception) {
             // Обработка ошибок
         }
     }
+
+    // Работа с DB
+    suspend fun insertTrip(trip: PrevTripsEntity){
+        Dao.insertItem(trip)
+    }
+
+    suspend fun deleteTrip(trip: PrevTripsEntity){
+        Dao.deleteItem(trip)
+    }
+
+    fun getAllItems() : Flow<List<PrevTripsEntity>>{
+        return Dao.getAllItems()
+    }
+
+    suspend fun countOfDBItems() : Int{
+        return Dao.getItemCount()
+    }
+
+    suspend fun checkAndHandleMaxItems() {
+        val count = Dao.getItemCount()
+        if (count > 4) {
+            Dao.deleteAllItems()
+        }
+    }
+
 }

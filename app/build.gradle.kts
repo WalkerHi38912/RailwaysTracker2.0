@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("kotlin-kapt")
 }
 
 android {
@@ -82,5 +83,7 @@ dependencies {
     //Material3 - Calendar
     implementation ("com.maxkeppeler.sheets-compose-dialogs:calendar:1.0.2")
 
-
+    //Room
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
 }
