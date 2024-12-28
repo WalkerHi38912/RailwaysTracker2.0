@@ -51,10 +51,11 @@ class Repository (private val TrainApi: TrainApiInterface, private val StationAp
         return Dao.getItemCount()
     }
 
-    suspend fun checkAndHandleMaxItems() {
+    suspend fun checkAndHandleMaxItems(trip: PrevTripsEntity) {
         val count = Dao.getItemCount()
         if (count > 4) {
             Dao.deleteAllItems()
+            Dao.insertItem(trip)
         }
     }
 

@@ -94,7 +94,7 @@ class TrainViewModel(private val repository: Repository) : ViewModel(){
         viewModelScope.launch {
             try {
                 repository.insertTrip(trip)
-                repository.checkAndHandleMaxItems()
+                repository.checkAndHandleMaxItems(trip)
                 fetchSavedTrips()
             } catch (e: Exception) {
                 _errorState.value = e.message
