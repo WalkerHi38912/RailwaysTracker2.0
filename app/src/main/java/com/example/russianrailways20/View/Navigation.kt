@@ -7,22 +7,23 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.russianrailways20.ViewModel.TrainViewModel
 
 @ExperimentalMaterial3Api
 @Composable
-fun NavigationGraph() {
+fun NavigationGraph(trainViewModel: TrainViewModel) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "main") {
         composable("main") {
-            MainScreen(navController)
+            MainScreen(navController, trainViewModel)
         }
         composable(
             route = "stationList/{field}",
             arguments = listOf(navArgument("field") { type = NavType.StringType })
         ) { backStackEntry ->
             val field = backStackEntry.arguments?.getString("field") ?: "to" // Default "to"
-            StationsListScreen(navController, field)
+            StationsListScreen(navController, field, trainViewModel)
         }
     }
 }

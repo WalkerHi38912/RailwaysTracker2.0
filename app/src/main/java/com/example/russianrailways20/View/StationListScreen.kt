@@ -48,19 +48,8 @@ import com.example.russianrailways20.R
 import com.example.russianrailways20.ViewModel.TrainViewModel
 
 @Composable
-fun StationsListScreen(navController: NavController, field: String) {
-    val context = LocalContext.current
+fun StationsListScreen(navController: NavController, field: String, trainViewModel: TrainViewModel) {
 
-    val dataBase = MainDB.createDB(context)
-    val dao = dataBase.dao
-
-    val repository = Repository(
-        TrainApi = TrainApiInterface.create(),
-        StationApi = StationApiInterface.create(),
-        Dao = dao
-    )
-    val factory = TrainViewModelFactory(repository)
-    val trainViewModel: TrainViewModel = viewModel(factory = factory)
     val stationResponse by trainViewModel.stationsData.collectAsState()
 
     var searchQuery by remember { mutableStateOf("") }

@@ -30,20 +30,8 @@ import com.example.russianrailways20.ViewModel.TrainViewModel
 
 @ExperimentalMaterial3Api
 @Composable
-fun MainScreen(navController: NavController){
-    val context = LocalContext.current
+fun MainScreen(navController: NavController, trainViewModel: TrainViewModel){
 
-    val dataBase = MainDB.createDB(context)
-    val dao = dataBase.dao
-
-    val repository = Repository(
-        TrainApi = TrainApiInterface.create(),
-        StationApi = StationApiInterface.create(),
-        Dao = dao
-    )
-
-    val factory = TrainViewModelFactory(repository)
-    val trainViewModel: TrainViewModel = viewModel(factory = factory)
 
     val trainData by trainViewModel.trainData.collectAsState()
     Box(
